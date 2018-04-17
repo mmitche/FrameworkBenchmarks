@@ -1,6 +1,12 @@
-FROM microsoft/dotnet:2.0-sdk-jessie
-WORKDIR /aspnetcore
-COPY Benchmarks Benchmarks
-COPY run-linux.sh run-linux.sh
-COPY setup-plaintext.sh setup-plaintext.sh
-CMD bash setup-plaintext.sh
+FROM microsoft/dotnet:2.1-sdk-stretch AS build
+WORKDIR /app
+COPY Benchmarks .
+RUN dotnet publish -c Release -o out
+
+FROM microsoft/dotnet:2.1-runtime AS runtime
+ENV ASPNETCORE_URLS http://+:8080
+ENV COMPlus_ReadyToRun 0
+WORKDIR /app
+COPY --from=build /app/out ./
+
+ENTRYPOINT ["dotnet", "Benchmarks.dll", "scenarios=plaintext"]
