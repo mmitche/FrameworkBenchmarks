@@ -44,9 +44,8 @@ namespace Benchmarks
                     .AddSingleton<Scenarios>()
                 )
                 .UseDefaultServiceProvider(
-                    (context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment());
-
-            webHostBuilder = webHostBuilder.UseKestrel();
+                    (context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
+                .UseKestrel();
 
             var threadCount = GetThreadCount(config);
 
@@ -59,8 +58,6 @@ namespace Benchmarks
 
                 Console.WriteLine($"Using Sockets with {x.IOQueueCount} threads");
             });
-
-            webHostBuilder.UseSetting(WebHostDefaults.ServerUrlsKey, string.Empty);
 
             var webHost = webHostBuilder.Build();
 
