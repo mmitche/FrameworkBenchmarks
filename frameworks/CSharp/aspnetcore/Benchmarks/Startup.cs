@@ -50,10 +50,11 @@ namespace Benchmarks
 
             // Common DB services
             services.AddSingleton<IRandom, DefaultRandom>();
-            services.AddSingleton<ApplicationDbSeeder>();
             services.AddEntityFrameworkSqlServer();
 
             var appSettings = Configuration.Get<AppSettings>();
+            Console.WriteLine($"Database: {appSettings.Database}");
+
             if (appSettings.Database == DatabaseServer.PostgreSql)
             {
                 services.AddDbContextPool<ApplicationDbContext>(options => options.UseNpgsql(appSettings.ConnectionString));
@@ -64,11 +65,7 @@ namespace Benchmarks
             }
             else
             {
-                services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(appSettings.ConnectionString));
-                if (Scenarios.Any("Raw") || Scenarios.Any("Dapper"))
-                {
-                    services.AddSingleton<DbProviderFactory>(SqlClientFactory.Instance);
-                }
+                throw new Exception("Database not supported");
             }
 
             if (Scenarios.Any("Ef"))
