@@ -113,7 +113,7 @@ namespace Benchmarks
             }
         }
 
-        public void Configure(IApplicationBuilder app, ApplicationDbSeeder dbSeeder)
+        public void Configure(IApplicationBuilder app)
         {
             if (Scenarios.Plaintext)
             {
@@ -187,14 +187,6 @@ namespace Benchmarks
             if (Scenarios.DbFortunesEf)
             {
                 app.UseFortunesEf();
-            }
-
-            if (Scenarios.Any("Db"))
-            {
-                if (!dbSeeder.Seed())
-                {
-                    Environment.Exit(1);
-                }
             }
 
             if (Scenarios.Any("Mvc"))
