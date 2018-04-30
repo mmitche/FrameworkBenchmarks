@@ -8,21 +8,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Utf8Json" Version="$(Utf8JsonPackageVersion)" />
-  </ItemGroup>
-  
-  <!-- These references are used when running locally -->
-  <ItemGroup Condition="'$(BenchmarksTargetFramework)' == ''">
-    <ProjectReference Include="..\..\src\Kestrel\Kestrel.csproj" />
-    <ProjectReference Include="..\..\src\Kestrel.Transport.Libuv\Kestrel.Transport.Libuv.csproj" />
-
-    <PackageReference Include="Microsoft.Extensions.Buffers.Sources" PrivateAssets="All" Version="$(MicrosoftAspNetCoreBenchmarkRunnerSourcesPackageVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="$(MicrosoftExtensionsConfigurationCommandLinePackageVersion)" />
-  </ItemGroup>
-
-  <!-- These references are used when running on the Benchmarks Server -->
-  <ItemGroup Condition="'$(BenchmarksTargetFramework)' != ''">
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="$(MicrosoftAspNetCoreAllPackageVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Buffers.Sources" Version="$(MicrosoftAspNetCoreAllPackageVersion)" />
+    <PackageReference Include="Utf8Json" Version="1.3.7" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.Extensions.Buffers.Sources" Version="2.1.0-preview2-final" />
   </ItemGroup>
 </Project>
