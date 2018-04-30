@@ -10,6 +10,5 @@
   <ItemGroup>
     <PackageReference Include="Utf8Json" Version="1.3.7" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview2-final" />
-    <PackageReference Include="Microsoft.Extensions.Buffers.Sources" Version="2.1.0-preview2-final" />
   </ItemGroup>
 </Project>
