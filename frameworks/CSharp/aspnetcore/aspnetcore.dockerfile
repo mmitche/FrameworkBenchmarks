@@ -1,6 +1,6 @@
 FROM microsoft/dotnet-nightly:2.1-sdk-stretch AS build
 WORKDIR /app
-COPY Benchmarks .
+COPY PlatformBenchmarks .
 RUN dotnet publish -c Release -o out
 
 FROM microsoft/dotnet-nightly:2.1-aspnetcore-runtime AS runtime
@@ -9,4 +9,4 @@ ENV COMPlus_ReadyToRun 0
 WORKDIR /app
 COPY --from=build /app/out ./
 
-ENTRYPOINT ["dotnet", "Benchmarks.dll", "scenarios=plaintext"]
+ENTRYPOINT ["dotnet", "PlatformBenchmarks.dll"]
