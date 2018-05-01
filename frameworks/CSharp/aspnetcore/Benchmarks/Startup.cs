@@ -198,8 +198,6 @@ namespace Benchmarks
             {
                 app.UseStaticFiles();
             }
-
-            app.RunDebugInfoPage();
         }
     }
 }
