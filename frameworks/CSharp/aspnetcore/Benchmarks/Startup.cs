@@ -58,10 +58,7 @@ namespace Benchmarks
 
             if (appSettings.Database == DatabaseServer.PostgreSql)
             {
-                if (Scenarios.Any("Ef"))
-                {
-                    services.AddDbContextPool<ApplicationDbContext>(options => options.UseNpgsql(appSettings.ConnectionString));
-                }
+                services.AddDbContextPool<ApplicationDbContext>(options => options.UseNpgsql(appSettings.ConnectionString));
                 
                 if (Scenarios.Any("Raw") || Scenarios.Any("Dapper"))
                 {
