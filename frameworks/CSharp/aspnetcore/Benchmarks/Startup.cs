@@ -127,6 +127,8 @@ namespace Benchmarks
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseDeveloperExceptionPage();
+
             if (Scenarios.Plaintext)
             {
                 app.UsePlainText();
