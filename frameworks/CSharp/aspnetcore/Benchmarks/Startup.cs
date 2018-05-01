@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MySql.Data.MySqlClient;
 using Npgsql;
 
 namespace Benchmarks
@@ -57,11 +58,21 @@ namespace Benchmarks
 
             if (appSettings.Database == DatabaseServer.PostgreSql)
             {
-                services.AddDbContextPool<ApplicationDbContext>(options => options.UseNpgsql(appSettings.ConnectionString));
+                if (Scenarios.Any("Ef"))
+                {
+                    services.AddDbContextPool<ApplicationDbContext>(options => options.UseNpgsql(appSettings.ConnectionString));
+                }
                 
                 if (Scenarios.Any("Raw") || Scenarios.Any("Dapper"))
                 {
                     services.AddSingleton<DbProviderFactory>(NpgsqlFactory.Instance);
+                }
+            }
+            else if (appSettings.Database == DatabaseServer.MySql)
+            {
+                if (Scenarios.Any("Raw") || Scenarios.Any("Dapper"))
+                {
+                    services.AddSingleton<DbProviderFactory>(MySqlClientFactory.Instance);
                 }
             }
             else

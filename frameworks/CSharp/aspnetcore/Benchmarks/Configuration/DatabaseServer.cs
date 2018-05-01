@@ -7,6 +7,7 @@ namespace Benchmarks.Configuration
     public enum DatabaseServer
     {
         SqlServer,
-        PostgreSql
+        PostgreSql,
+        MySql
     }
 }
