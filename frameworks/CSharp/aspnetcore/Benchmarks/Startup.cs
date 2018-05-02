@@ -75,10 +75,6 @@ namespace Benchmarks
                     services.AddSingleton<DbProviderFactory>(MySqlClientFactory.Instance);
                 }
             }
-            else
-            {
-                throw new Exception("Database not supported");
-            }
 
             if (Scenarios.Any("Ef"))
             {
