@@ -55,6 +55,7 @@ namespace Benchmarks
 
             var appSettings = Configuration.Get<AppSettings>();
             Console.WriteLine($"Database: {appSettings.Database}");
+            Console.WriteLine($"Connection String: {appSettings.ConnectionString}");
 
             if (appSettings.Database == DatabaseServer.PostgreSql)
             {
@@ -67,12 +68,24 @@ namespace Benchmarks
                 {
                     services.AddSingleton<DbProviderFactory>(NpgsqlFactory.Instance);
                 }
+
+                using (var connection = NpgsqlFactory.Instance.CreateConnection())
+                {
+                    connection.ConnectionString = _connectionString;
+                    await connection.OpenAsync();
+                }
             }
             else if (appSettings.Database == DatabaseServer.MySql)
             {
                 if (Scenarios.Any("Raw") || Scenarios.Any("Dapper"))
                 {
                     services.AddSingleton<DbProviderFactory>(MySqlClientFactory.Instance);
+                }
+
+                using (var connection = MySqlClientFactory.Instance.CreateConnection())
+                {
+                    connection.ConnectionString = _connectionString;
+                    await connection.OpenAsync();
                 }
             }
 

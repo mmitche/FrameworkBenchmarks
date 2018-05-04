@@ -38,6 +38,10 @@ namespace Benchmarks
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseConfiguration(config)
                 .UseStartup<Startup>()
+                .ConfigureLogging(loggerFactory =>
+                {
+                    loggerFactory.AddConsole().SetMinimumLevel(LogLevel.Information);
+                })
                 .ConfigureServices(services => services
                     .AddSingleton(new ConsoleArgs(args))
                     .AddSingleton<IScenariosConfiguration, ConsoleHostScenariosConfiguration>()
