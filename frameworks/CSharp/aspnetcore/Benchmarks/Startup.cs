@@ -71,8 +71,8 @@ namespace Benchmarks
 
                 using (var connection = NpgsqlFactory.Instance.CreateConnection())
                 {
-                    connection.ConnectionString = _connectionString;
-                    await connection.OpenAsync();
+                    connection.ConnectionString = appSettings.ConnectionString;
+                    connection.Open();
                 }
             }
             else if (appSettings.Database == DatabaseServer.MySql)
@@ -84,8 +84,8 @@ namespace Benchmarks
 
                 using (var connection = MySqlClientFactory.Instance.CreateConnection())
                 {
-                    connection.ConnectionString = _connectionString;
-                    await connection.OpenAsync();
+                    connection.ConnectionString = appSettings.ConnectionString;
+                    connection.Open();
                 }
             }
 
