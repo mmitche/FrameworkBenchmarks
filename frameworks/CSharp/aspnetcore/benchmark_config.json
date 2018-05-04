@@ -1,5 +1,5 @@
 {
-  "framework": "aspnetcore",
+  "framework": "aspcore",
   "tests": [{
     "default": {
       "plaintext_url": "/plaintext",
