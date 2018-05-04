@@ -76,6 +76,7 @@ namespace PlatformBenchmarks
         {
             await Writer.FlushAsync();
         }
+        
         private static void PlainText(PipeWriter pipeWriter)
         {
             var writer = new BufferWriter<PipeWriter>(pipeWriter);
