@@ -38,6 +38,7 @@ class DockerHelper:
                     dockerfile=dockerfile,
                     tag=tag,
                     forcerm=True,
+                    timeout=3600,
                     pull=True)
                 buffer = ""
                 for token in output:
@@ -338,7 +339,7 @@ class DockerHelper:
         try:
             self.client.containers.run(
                 'techempower/tfb.wrk',
-                'curl %s' % url,
+                'curl --max-time 5 %s' % url,
                 remove=True,
                 log_config={'type': None},
                 network=self.benchmarker.config.network,
