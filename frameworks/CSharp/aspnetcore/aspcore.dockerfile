@@ -10,4 +10,4 @@ ENV COMPlus_ReadyToRun 0
 WORKDIR /app
 COPY --from=build /app/out ./
 
-ENTRYPOINT ["dotnet", "PlatformBenchmarks.dll", "--threadCount", "10"]
+ENTRYPOINT ["dotnet", "PlatformBenchmarks.dll", "--threadCount", "12"]
