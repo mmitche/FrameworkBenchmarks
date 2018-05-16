@@ -182,7 +182,7 @@ namespace PlatformBenchmarks
             writer.Write(_fortunesTableStart);
             foreach (var item in model)
             {
-                writer.Write(_fortunesTableStart);
+                writer.Write(_fortunesRowStart);
                 writer.WriteNumeric((uint)item.Id);
                 writer.Write(_fortunesColumn);
                 writer.WriteUtf8String(HtmlEncoder.Encode(item.Message));
