@@ -9,4 +9,4 @@ ENV COMPlus_ReadyToRun 0
 WORKDIR /app
 COPY --from=build /app/out ./
 
-ENTRYPOINT ["dotnet", "PlatformBenchmarks.dll"]
+ENTRYPOINT ["dotnet", "PlatformBenchmarks.dll", "--KestrelTransport", "Libuv"]
