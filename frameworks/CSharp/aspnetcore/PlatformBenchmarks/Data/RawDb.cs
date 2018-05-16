@@ -11,17 +11,17 @@ using Microsoft.Extensions.Options;
 
 namespace PlatformBenchmarks
 {
-    public class RawDb
+    public class RawDb : IDb
     {
         private readonly IRandom _random;
         private readonly DbProviderFactory _dbProviderFactory;
         private readonly string _connectionString;
 
-        public RawDb(IRandom random, DbProviderFactory dbProviderFactory, IOptions<AppSettings> appSettings)
+        public RawDb(IRandom random, DbProviderFactory dbProviderFactory, AppSettings appSettings)
         {
             _random = random;
             _dbProviderFactory = dbProviderFactory;
-            _connectionString = appSettings.Value.ConnectionString;
+            _connectionString = appSettings.ConnectionString;
         }
 
         public async Task<World> LoadSingleQueryRow()

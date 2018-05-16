@@ -31,25 +31,14 @@ namespace PlatformBenchmarks
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<AppSettings>(Configuration);
-
-            // Common DB services
-            services.AddSingleton<IRandom, DefaultRandom>();
-            //services.AddEntityFrameworkSqlServer();
-
             var appSettings = Configuration.Get<AppSettings>();
             Console.WriteLine($"Database: {appSettings.Database}");
 
-            services.AddSingleton<DbProviderFactory>(NpgsqlFactory.Instance);
-
-            // Is Singleton valid?
-            services.AddSingleton<RawDb>();
+            BenchmarkApplication.Db = new RawDb(new DefaultRandom(), NpgsqlFactory.Instance, appSettings);
         }
-
 
         public void Configure(IApplicationBuilder app)
         {
-            
         }
     }
 }

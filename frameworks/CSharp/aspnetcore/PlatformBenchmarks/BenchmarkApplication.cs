@@ -35,6 +35,8 @@ namespace PlatformBenchmarks
         private readonly static AsciiString _fortunesTableEnd = "</table></body></html>";
         private readonly static AsciiString _contentLengthGap = new string(' ', 4);
 
+        public static IDb Db { get; set; }
+
         public static class Paths
         {
             public readonly static AsciiString Plaintext = "/plaintext";
@@ -143,9 +145,7 @@ namespace PlatformBenchmarks
 
         private async Task Fortunes(PipeWriter pipeWriter)
         {
-            // Need to request RawDb from services
-            // var db = Services.GetService<RawDb>();
-            OutputFortunes(pipeWriter, await db.LoadFortunesRows());
+            OutputFortunes(pipeWriter, await Db.LoadFortunesRows());
         }
 
         private void OutputFortunes(PipeWriter pipeWriter, List<Fortune> model)
