@@ -34,7 +34,14 @@ namespace PlatformBenchmarks
             var appSettings = Configuration.Get<AppSettings>();
             Console.WriteLine($"Database: {appSettings.Database}");
 
-            BenchmarkApplication.Db = new RawDb(new DefaultRandom(), NpgsqlFactory.Instance, appSettings);
+            if (appSettings.Database == DatabaseServer.PostgreSql)
+            {
+                BenchmarkApplication.Db = new RawDb(new DefaultRandom(), NpgsqlFactory.Instance, appSettings);
+            }
+            else if (appSettings.Database == DatabaseServer.MySql)
+            {
+                BenchmarkApplication.Db = new RawDb(new DefaultRandom(), MySqlClientFactory.Instance, appSettings);
+            }            
         }
 
         public void Configure(IApplicationBuilder app)
