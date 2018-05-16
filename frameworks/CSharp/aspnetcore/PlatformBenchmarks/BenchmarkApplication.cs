@@ -59,6 +59,10 @@ namespace PlatformBenchmarks
                 {
                     requestType = RequestType.Json;
                 }
+                else if (Paths.Fortunes.Length <= path.Length && path.StartsWith(Paths.Fortunes))
+                {
+                    requestType = RequestType.Fortunes;
+                }
             }
 
             _requestType = requestType;
