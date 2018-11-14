@@ -27,7 +27,7 @@ namespace Benchmarks.Middleware
 
         public async Task Invoke(HttpContext httpContext)
         {
-            if (httpContext.Request.Path.StartsWithSegments(_path, StringComparison.Ordinal))
+            if (httpContext.Request.Path.StartsWithSegments("/fortunes/raw", StringComparison.Ordinal))
             {
                 var db = httpContext.RequestServices.GetService<RawDb>();
                 var rows = await db.LoadFortunesRows();
