@@ -46,9 +46,15 @@ namespace Benchmarks
                 .UseDefaultServiceProvider(
                     (context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
                 .UseKestrel(
-                    options => options.UseHttps("testCert.pfx", "testPassword")
-                );
-
+                    options =>
+                    {
+                        options.AddServerHeader = false;
+                        options.Listen(IPAddress.Any, 8080, listenOptions =>
+                        {
+                            listenOptions.UseHttps("testCert.pfx", "testPassword");
+                        });
+                    }
+                )
             var threadCount = GetThreadCount(config);
 
             webHostBuilder.UseSockets(x =>
