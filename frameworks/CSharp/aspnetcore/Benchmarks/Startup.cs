@@ -116,7 +116,7 @@ namespace Benchmarks
 
                 if (Scenarios.MvcJson || Scenarios.Any("MvcDbSingle") || Scenarios.Any("MvcDbMulti"))
                 {
-                    mvcBuilder.AddJsonFormatters();
+                    mvcBuilder.AddNewtonsoftJson();
                 }
 
                 if (Scenarios.MvcViews || Scenarios.Any("MvcDbFortunes"))
