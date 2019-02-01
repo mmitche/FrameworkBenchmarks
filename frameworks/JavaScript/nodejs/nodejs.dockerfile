@@ -8,4 +8,6 @@ RUN npm install
 
 ENV NODE_HANDLER mysql-raw
 
+RUN openssl version
+
 CMD ["node", "app.js"]

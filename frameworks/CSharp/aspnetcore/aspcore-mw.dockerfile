@@ -1,4 +1,5 @@
 FROM microsoft/dotnet:2.2-sdk AS build
+
 WORKDIR /app
 COPY Benchmarks .
 
@@ -10,5 +11,7 @@ ENV ASPNETCORE_URLS https://+:8080
 ENV COMPlus_ReadyToRun 0
 WORKDIR /app
 COPY --from=build /app/out ./
+
+RUN openssl version
 
 ENTRYPOINT ["dotnet", "Benchmarks.dll", "scenarios=plaintext"]
