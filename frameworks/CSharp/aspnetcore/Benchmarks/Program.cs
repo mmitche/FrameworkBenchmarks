@@ -45,7 +45,9 @@ namespace Benchmarks
                 )
                 .UseDefaultServiceProvider(
                     (context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
-                .UseKestrel();
+                .UseKestrel(
+                    options => options.UseHttps("testCert.pfx", "testPassword")
+                );
 
             var threadCount = GetThreadCount(config);
 
