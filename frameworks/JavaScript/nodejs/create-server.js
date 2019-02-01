@@ -2,6 +2,8 @@
 // the master of the cluster.
 
 const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const parseurl = require('parseurl'); // faster than native nodejs url package
 
 // Initialize routes & their handlers (once)
@@ -10,7 +12,7 @@ const basicHandler = routing.BasicHandler;
 const queryHandler = routing.QueryHandler;
 const routeNotImplemented = require('./helper').responses.routeNotImplemented;
 
-module.exports = http.createServer(function (req, res) {
+var app = function (req, res) {
   const url = parseurl(req);
   const route = url.pathname;
 
@@ -29,5 +31,15 @@ module.exports = http.createServer(function (req, res) {
       return routeNotImplemented(req, res);
     }
   }
+};
 
-}).listen(8080, () => console.log("NodeJS worker listening on port 8080"));
+module.exports = function() {
+  http.createServer(app).listen(8080, () => console.log("NodeJS worker listening on port 8080"));
+
+  const options = {
+    pfx: fs.readFileSync('testCert.pfx'),
+    passphrase: 'testPassword'
+  };
+
+  https.createServer(options, app).listen(8081, () => console.log("NodeJS worker listening on port 8081"));
+}
