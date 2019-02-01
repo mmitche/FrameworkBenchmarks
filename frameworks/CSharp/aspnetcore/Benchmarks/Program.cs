@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Runtime;
 using System.Threading;
@@ -55,7 +56,7 @@ namespace Benchmarks
                         });
                     }
                 );
-                
+
             var threadCount = GetThreadCount(config);
 
             webHostBuilder.UseSockets(x =>
