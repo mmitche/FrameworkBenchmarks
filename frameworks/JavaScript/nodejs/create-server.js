@@ -12,13 +12,11 @@ const basicHandler = routing.BasicHandler;
 const queryHandler = routing.QueryHandler;
 const routeNotImplemented = require('./helper').responses.routeNotImplemented;
 
-module.exports = function() {
-  const options = {
-    pfx: fs.readFileSync('testCert.pfx'),
-    passphrase: 'testPassword'
-  };
-
-  https.createServer(options, function (req, res) {
+const options = {
+  pfx: fs.readFileSync('testCert.pfx'),
+  passphrase: 'testPassword'
+};
+module.exports = https.createServer(options, function (req, res) {
     const url = parseurl(req);
     const route = url.pathname;
 
@@ -39,4 +37,3 @@ module.exports = function() {
     }
 
   }).listen(8080, () => console.log("NodeJS worker listening on port 8080"));
-}
