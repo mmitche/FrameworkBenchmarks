@@ -54,7 +54,8 @@ namespace Benchmarks
                             listenOptions.UseHttps("testCert.pfx", "testPassword");
                         });
                     }
-                )
+                );
+                
             var threadCount = GetThreadCount(config);
 
             webHostBuilder.UseSockets(x =>
